@@ -3,31 +3,24 @@ package main
 import "core:fmt"
 import rl "vendor:raylib"
 
+BEEPER_COLOR :: rl.Color{151,152,145,255}
+
 WIDTH :: 1200
 HEIGHT :: 1000
 WINDOW_TITLE :: "Argentum"
 
-DebugerInfo :: struct {
-	exe_name: string,
-	pid:      u32,
+DebugInfo :: struct{
+	pid: i32,
 }
 
-InitDebugger :: proc() -> DebugerInfo {
-	info: DebugerInfo
-	return info
-}
-
-RunDebugger :: proc(info : DebugerInfo) {
+InitDebugger :: proc() -> DebugInfo{
 }
 
 main :: proc() {
-
-	init_info: DebugerInfo = InitDebugger()
-
-	RunDebugger(init_info);
-
 	rl.InitWindow(WIDTH, HEIGHT, WINDOW_TITLE)
 	defer rl.CloseWindow()
+
+	db_info: DebugInfo = InitDebugger();
 
 	main_loop: for {
 		if (rl.WindowShouldClose() == true) {
@@ -35,7 +28,9 @@ main :: proc() {
 		}
 		rl.BeginDrawing()
 
+		RunDebugger(db_info);
+
 		defer rl.EndDrawing()
-		rl.ClearBackground(rl.BLACK)
+		rl.ClearBackground(BEEPER_COLOR)
 	}
 }
