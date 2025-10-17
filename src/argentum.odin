@@ -2,8 +2,8 @@ package main
 
 import "core:fmt"
 import rl "vendor:raylib"
+import ui "ui"
 
-BEEPER_COLOR :: rl.Color{151,152,145,255}
 
 WIDTH :: 1200
 HEIGHT :: 1000
@@ -13,14 +13,14 @@ DebugInfo :: struct{
 	pid: i32,
 }
 
-InitDebugger :: proc() -> DebugInfo{
-}
+// InitDebugger :: proc() -> DebugInfo{
+// }
 
 main :: proc() {
 	rl.InitWindow(WIDTH, HEIGHT, WINDOW_TITLE)
 	defer rl.CloseWindow()
 
-	db_info: DebugInfo = InitDebugger();
+	// db_info: DebugInfo = InitDebugger();
 
 	main_loop: for {
 		if (rl.WindowShouldClose() == true) {
@@ -28,9 +28,10 @@ main :: proc() {
 		}
 		rl.BeginDrawing()
 
-		RunDebugger(db_info);
+		ui.DrawPane();
+		// RunDebugger(db_info);
 
 		defer rl.EndDrawing()
-		rl.ClearBackground(BEEPER_COLOR)
+		rl.ClearBackground(ui.BEEPER_COLOR)
 	}
 }
